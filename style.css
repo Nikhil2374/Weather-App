@@ -1,0 +1,47 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+#about {
+    background-color: #f8f9fa;
+}
+
+#about h2 {
+    color: #007bff;
+}
+
+#about p {
+    color: #343a40;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1;
+}
+
+footer {
+    background-color: #4bbcf0;
+    height: 70px;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+}
+#thank-you {
+    background-color: #007bff;
+    color: #fff;
+    padding: 50px 0;
+    text-align: center;
+}
+.animated-text {
+    font-size: 2rem;
+    animation: fadeIn 3s ease-in-out infinite alternate;
+}
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
