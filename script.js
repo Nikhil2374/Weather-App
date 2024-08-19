@@ -1,47 +1,36 @@
-const options = {
-    method: 'GET',
-    headers: {
-        'X-RapidAPI-Key': 'cc2687ddd2mshabbddd8df853acfp172096jsndbd3b5d44571',
-        'X-RapidAPI-Host': 'weather-by-api-ninjas.p.rapidapi.com'
-    }
+const apiKey = '1b6537206dc722a241a2cff29af7a5cd';
 
+const getWeather = (city) => {
+    document.getElementById('cityname').innerHTML = city;
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
+        .then(response => response.json())
+        .then((response) => {
+            console.log(response);
+
+            const current = response.main;
+            const weather = response.weather[0];
+            const wind = response.wind;
+            const sys = response.sys;
+
+            document.getElementById('cloud_pct').innerHTML = weather.description;
+            document.getElementById('feels_like').innerHTML = current.feels_like;
+            document.getElementById('humidity').innerHTML = current.humidity;
+            document.getElementById('humidity2').innerHTML = current.humidity;
+            document.getElementById('max_temp').innerHTML = current.temp_max;
+            document.getElementById('min_temp').innerHTML = current.temp_min;
+            document.getElementById('sunrise').innerHTML = new Date(sys.sunrise * 1000).toLocaleTimeString();
+            document.getElementById('sunset').innerHTML = new Date(sys.sunset * 1000).toLocaleTimeString();
+            document.getElementById('temp').innerHTML = current.temp;
+            document.getElementById('temp2').innerHTML = current.temp;
+            document.getElementById('wind_speed').innerHTML = wind.speed;
+            document.getElementById('wind_speed2').innerHTML = wind.speed;
+        })
+        .catch(err => console.error('Error fetching weather data:', err));
 };
 
-const getWeather = (city) =>{
-cityname.innerHTML = city
-fetch('https://weather-by-api-ninjas.p.rapidapi.com/v1/weather?city=' + city, options)
-    .then(response => response.json())
-    .then((response) => {
+document.getElementById('submit').addEventListener('click', (e) => {
+    e.preventDefault();
+    getWeather(document.getElementById('city').value);
+});
 
-
-
-
-
-        console.log(response)
-
-
-        cloud_pct.innerHTML = response.cloud_pct
-        feels_like.innerHTML = response.feels_like
-        humidity.innerHTML = response.humidity
-        humidity2.innerHTML = response.humidity
-        max_temp.innerHTML = response.max_temp
-        min_temp.innerHTML = response.min_temp
-        sunrise.innerHTML = response.sunrise
-        sunset.innerHTML = response.sunset
-        temp.innerHTML = response.temp
-        temp2.innerHTML = response.temp
-        //wind_degrees.innerHTML = response.wind_degrees
-        wind_speed.innerHTML = response.wind_speed
-        wind_speed2.innerHTML = response.wind_speed
-
-
-    })
-
-    .catch(err => console.error(err));
-}
-submit.addEventListener("click", (e)=>{
-    e.preventDefault()
-    getWeather(city.value)
-})
-
-getWeather("Mohali")
+getWeather('Mohali');
